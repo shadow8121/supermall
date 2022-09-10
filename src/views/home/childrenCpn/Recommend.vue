@@ -2,7 +2,7 @@
   <div class="recommend">
     <div v-for="item in recommends" :key="item.link">
       <a :href="item.link">
-        <img :src="item.image" alt="">
+        <img :src="item.image" alt="" />
         <div>{{ item.title }}</div>
       </a>
     </div>
@@ -28,7 +28,7 @@ export default {
   display: flex;
   justify-content: space-around;
   padding: 10px 0 15px;
-  border-bottom: 8px solid #eee;
+  border-bottom: 6px solid #eee;
   text-align: center;
   font-size: 12px;
 }

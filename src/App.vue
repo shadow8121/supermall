@@ -3,7 +3,7 @@
     <keep-alive exclude="Detail">
       <router-view />
     </keep-alive>
-    <main-tab-bar v-show="$route.path.search('/detail')" />
+    <main-tab-bar ref="tabBar" v-show="$route.path.search('/detail')" />
   </div>
 </template>
 

@@ -38,4 +38,12 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.main-tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+</style>

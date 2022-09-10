@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" ref="wrapper" :style="{ height: viewHeight - this.subHeight + 'px' }">
+  <div ref="bsWrapper" class="bs-wrapper" :style="{ height: viewHeight - this.subHeight + 'px' }">
     <div class="content">
       <slot></slot>
     </div>
@@ -52,7 +52,7 @@ export default {
   mounted() {
     BScroll.use(ObserveImage)
 
-    this.bs = new BScroll(this.$refs.wrapper, {
+    this.bs = new BScroll(this.$refs.bsWrapper, {
       probeType: this.probeType,
       pullUpLoad: this.pullUpLoad,
       click: this.click,
@@ -81,8 +81,16 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-  overflow: hidden;
+.bs-wrapper {
+  position: relative;
+  z-index: 0;
   width: 100%;
+  margin-top: 44px;
+}
+
+.content {
+  width: 100%;
+  position: absolute;
+  z-index: -1;
 }
 </style>

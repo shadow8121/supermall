@@ -34,8 +34,8 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 2px 8px;
-  background-color: rgba(0, 0, 0, 0.6);
+  padding: 3px 8px;
+  background-color: var(--color-tint);
   color: #fff;
   border-radius: 9px;
 }

@@ -32,6 +32,11 @@ export default {
 
 <style scoped>
 .nav-bar {
+  position: fixed;
+  z-index: 1;
+  top: 0px;
+  left: 0;
+  right: 0;
   background-color: var(--color-high-text);
 }
 </style>

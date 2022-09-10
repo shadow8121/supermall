@@ -45,8 +45,13 @@ export default {
 
 <style scoped>
 .bottom-bar {
+  position: fixed;
+  z-index: 1;
+  bottom: 49px;
+  left: 0;
+  right: 0;
   height: 44px;
-  background-color: rgba(200, 200, 200, 0.1);
+  background-color: #fff;
 }
 
 .operation {

@@ -1,11 +1,11 @@
 <template>
   <div class="cart-item">
     <div class="select">
-      <input type="checkbox" v-model="goodsItem.checked">
+      <input type="checkbox" v-model="goodsItem.checked" />
       <img src="~@/assets/img/cart/tick.svg" alt="" :class="{ checked: goodsItem.checked }" />
     </div>
     <div class="picture">
-      <img :src="goodsItem.img" alt="">
+      <img :src="goodsItem.img" alt="" />
     </div>
     <div class="info">
       <h5 class="title">{{ goodsItem.title }}</h5>
@@ -50,7 +50,7 @@ export default {
 .select {
   position: relative;
   overflow: hidden;
-  width: 6%;
+  width: 22px;
   text-align: center;
 }
 

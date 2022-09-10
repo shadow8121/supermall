@@ -81,7 +81,7 @@ export default {
       // backIcon 是否显示
       this.isShowBackTop = -position.y >= 1000
       // tabs 的样式随着滚动变换
-      let y = -(position.y - 44)
+      let y = -position.y
       if (0 <= y && y < this.tabsSettle[1]) {
         this.currentSettle = 0
       } else if (y >= this.tabsSettle[1] && y < this.tabsSettle[2]) {
@@ -96,7 +96,7 @@ export default {
     // tabs 切换
     settleSwitch(index) {
       this.currentSettle = index
-      this.$refs.bs.scrollTo(0, -(this.tabsSettle[index] - 44), 0)
+      this.$refs.bs.scrollTo(0, -this.tabsSettle[index], 0)
     },
 
     // 加入购物车

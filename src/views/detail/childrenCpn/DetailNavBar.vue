@@ -1,16 +1,16 @@
 <template>
-  <nav-bar>
-    <div slot="left" @click="back" class="back"><strong>&lt;</strong></div>
-    <div slot="center" class="tabs">
-      <span v-for="(tab, index) in tabs" v-on:click="tabSwitch(index)" :class="{ active: index == currentSettle }">{{
-          tab
-      }}</span>
-    </div>
-  </nav-bar>
+  <div class="detail-nav-bar">
+    <nav-bar>
+      <div slot="left" @click="back" class="back"><strong>&lt;</strong></div>
+      <div slot="center" class="tabs">
+        <span v-for="(tab, index) in tabs" v-on:click="tabSwitch(index)" :class="{ active: index == currentSettle }">{{ tab }}</span>
+      </div>
+    </nav-bar>
+  </div>
 </template>
 
 <script>
-import NavBar from 'components/common/navbar/NavBar.vue';
+import NavBar from 'components/common/navbar/NavBar.vue'
 
 export default {
   name: 'DetailNavBar',
@@ -41,6 +41,14 @@ export default {
 </script>
 
 <style scoped>
+.detail-nav-bar {
+  position: fixed;
+  z-index: 1;
+  top: 0px;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+}
 .tabs {
   display: flex;
   justify-content: space-around;
@@ -48,6 +56,6 @@ export default {
 }
 
 .active {
-  color: var(--color-high-text)
+  color: var(--color-high-text);
 }
 </style>

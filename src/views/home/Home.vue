@@ -3,13 +3,11 @@
     <nav-bar class="nav-home" color="#fff">
       <div slot="center">蘑菇街</div>
     </nav-bar>
-    <tab-control ref="tabControlDouble" :titles="['流行', '新款', '精选']" v-on:tabClick="tabClick"
-      v-show="isShowTabControlDouble" class="sticky" />
-    <scroll ref="bs" :probeType="3" :pullUpLoad="true" :click="true" v-on:contentScroll="contentScroll"
-      v-on:fetchData="fetchData">
-      <home-swiper :banners="banner" v-on:swiperLoad="swiperLoad" />
+    <tab-control ref="tabControlDouble" :titles="['流行', '新款', '精选']" v-on:tabClick="tabClick" v-show="isShowTabControlDouble" class="sticky" />
+    <scroll ref="bs" :probeType="3" :pullUpLoad="true" :click="true" v-on:contentScroll="contentScroll" v-on:fetchData="fetchData">
+      <home-swiper :banners="banner" v-on:swiperLoad="getTabOffsetTop" />
       <recommend :recommends="recommend" />
-      <feature />
+      <feature v-on:featureLoad="getTabOffsetTop" />
       <tab-control ref="tabControl" :titles="['流行', '新款', '精选']" v-on:tabClick="tabClick" />
       <goods-list :goods="showGoods" />
     </scroll>
@@ -22,8 +20,7 @@
 import NavBar from 'components/common/navbar/NavBar'
 
 // 子组件
-import { HomeSwiper, Recommend, Feature } from './childrenCpn'
-import TabControl from 'components/content/tabControl/TabControl'
+import { HomeSwiper, TabControl, Recommend, Feature } from './childrenCpn'
 import GoodsList from 'components/content/goods/GoodsList.vue'
 
 import Scroll from 'components/content/scroll/Scroll'
@@ -42,13 +39,14 @@ export default {
       banner: [],
       recommend: [],
       goods: {
-        'pop': { page: 0, list: [] },
-        'new': { page: 0, list: [] },
-        'sell': { page: 0, list: [] }
+        pop: { page: 0, list: [] },
+        new: { page: 0, list: [] },
+        sell: { page: 0, list: [] }
       },
       currentType: 'pop',
       isShowBackTop: false,
       tabOffsetTop: 0,
+      offsetDebounce: null,
       isShowTabControlDouble: false,
       leaveY: 0
     }
@@ -61,7 +59,7 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
-    BackTop,
+    BackTop
   },
   computed: {
     showGoods() {
@@ -71,12 +69,18 @@ export default {
   methods: {
     /* 方法处理相关 */
     tabClick(index) {
+      if (this.isShowTabControlDouble) {
+        this.$refs.bs.scrollTo(0, -this.tabOffsetTop, 0)
+      }
       switch (index) {
-        case 0: this.currentType = 'pop'
+        case 0:
+          this.currentType = 'pop'
           break
-        case 1: this.currentType = 'new'
+        case 1:
+          this.currentType = 'new'
           break
-        case 2: this.currentType = 'sell'
+        case 2:
+          this.currentType = 'sell'
           break
       }
       this.$refs.tabControl.currentIndex = this.$refs.tabControlDouble.currentIndex = index
@@ -91,9 +95,9 @@ export default {
     fetchData() {
       this.getHomeGoods(this.currentType)
     },
-    swiperLoad() {
-      // 获取 tab-control 的 offsetTop
-      this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop - 44
+    // 获取 tab-control 的 offsetTop
+    getTabOffsetTop() {
+      this.offsetDebounce()
     },
 
     /* 网络请求相关 */
@@ -119,6 +123,10 @@ export default {
     this.getHomeGoods('sell')
   },
   mounted() {
+    // 为获取 tab-control 的 offset 做防抖
+    this.offsetDebounce = debounce(() => {
+      this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop
+    }, 500)
     // 图片加载完成后刷新 better-scroll 可滚动高度
     let refresh = debounce(this.$refs.bs.refresh, 100)
     this.$bus.$on('goodsLoad', () => {
@@ -136,11 +144,12 @@ export default {
 </script>
 
 <style scoped>
-.home {
-  height: 100vh;
-}
-
 .nav-home {
+  position: fixed;
+  z-index: 1;
+  top: 0px;
+  left: 0;
+  right: 0;
   background-color: var(--color-tint);
 }
 
