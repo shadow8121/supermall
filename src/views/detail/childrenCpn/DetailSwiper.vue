@@ -2,7 +2,7 @@
   <div>
     <swiper>
       <swiper-item v-for="item in swiperImgs" :key="item">
-        <img :src="item" alt="" class="img">
+        <img :src="item" alt="" class="img" />
       </swiper-item>
     </swiper>
   </div>
@@ -25,12 +25,12 @@ export default {
     Swiper,
     SwiperItem
   },
-  created() { }
+  created() {}
 }
 </script>
 
 <style scoped>
 .img {
-  height: 300px;
+  height: 360px;
 }
 </style>

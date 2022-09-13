@@ -150,7 +150,6 @@ export default {
   top: 0px;
   left: 0;
   right: 0;
-  background-color: var(--color-tint);
 }
 
 .sticky {

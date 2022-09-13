@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-bar" :style="{ color: color }">
+  <div class="nav-bar" :style="{ color: color, backgroundColor: bgColor }">
     <div class="left">
       <slot name="left"></slot>
     </div>
@@ -18,7 +18,11 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'var(--color-text)'
+      default: '#fff'
+    },
+    bgColor: {
+      type: String,
+      default: 'var(--color-tint)'
     }
   }
 }
@@ -30,7 +34,7 @@ export default {
   height: 44px;
   text-align: center;
   line-height: 44px;
-  box-shadow: 1px 0 1px rgba(0, 0, 0, 0.2)
+  box-shadow: 1px 0 1px rgba(0, 0, 0, 0.2);
 }
 
 .left,

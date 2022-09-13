@@ -1,6 +1,6 @@
 <template>
   <div class="detail-nav-bar">
-    <nav-bar>
+    <nav-bar color="var(--color-text)" bgColor="#fff">
       <div slot="left" @click="back" class="back"><strong>&lt;</strong></div>
       <div slot="center" class="tabs">
         <span v-for="(tab, index) in tabs" v-on:click="tabSwitch(index)" :class="{ active: index == currentSettle }">{{ tab }}</span>
@@ -47,7 +47,11 @@ export default {
   top: 0px;
   left: 0;
   right: 0;
-  background-color: #fff;
+}
+
+.back {
+  font-size: 20px;
+  line-height: 40px;
 }
 .tabs {
   display: flex;

@@ -4,9 +4,6 @@ import router from './router'
 import store from './store'
 import Toast from './components/content/toast/'
 import VueLazyload from 'vue-lazyload'
-import fastClick from 'fastclick'
-
-fastClick.attach(document.body)
 
 Vue.config.productionTip = false
 

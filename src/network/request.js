@@ -21,5 +21,6 @@ export function request(config) {
     res => res.data,
     err => err.message
   )
+
   return instance(config)
 }
